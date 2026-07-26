@@ -22,26 +22,35 @@ ApiMasters Kubernetes Foundations Course Material
 1. Install Chocolatey if needed (elevated PowerShell):
    - `Set-ExecutionPolicy Bypass -Scope Process -Force`
    - `iwr https://community.chocolatey.org/install.ps1 -UseBasicParsing | iex`
-2. Install Minikube:
+2. Install Docker Desktop:
+   - `choco install docker-desktop -y`
+   - Open Docker Desktop and wait until Docker is running.
+3. Install Minikube:
    - `choco install minikube -y`
-3. Start Minikube:
-   - `minikube start --driver=hyperv`
-4. Verify:
+4. Start Minikube:
+   - `minikube start --driver=docker`
+5. Verify:
    - `minikube status`
 
-> For Windows, Hyper-V is common. If using VirtualBox, replace `--driver=hyperv` with `--driver=virtualbox`.
+> Docker is the recommended driver on Windows when Docker Desktop is available. If you need Hyper-V instead, use `minikube start --driver=hyperv`.
 
 ### Linux
-1. Download Minikube:
+1. Install Docker Engine:
+   - `sudo apt update`
+   - `sudo apt install -y docker.io`
+   - `sudo systemctl enable --now docker`
+   - `sudo usermod -aG docker $USER`
+   - Log out and log back in, or open a new terminal and run `newgrp docker` to apply group membership.
+2. Download Minikube:
    - `curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64`
-2. Install it:
+3. Install it:
    - `sudo install minikube-linux-amd64 /usr/local/bin/minikube`
-3. Start Minikube:
+4. Start Minikube:
    - `minikube start --driver=docker`
-4. Verify:
+5. Verify:
    - `minikube status`
 
-> If Docker is unavailable, use `--driver=virtualbox` or another supported driver and install that driver first.
+> Docker is the preferred Linux driver for Minikube. If Docker is unavailable, use `--driver=virtualbox` or another supported driver after installing that driver first.
 
 ### WSL2
 1. Ensure WSL2 is installed and your distro is running.
