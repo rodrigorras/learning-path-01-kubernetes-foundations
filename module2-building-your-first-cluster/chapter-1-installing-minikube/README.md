@@ -3,6 +3,8 @@ ApiMasters Kubernetes Foundations Course Material
 
 ## Minikube Installation Guide
 
+> Tip: Minikube features an official command builder for your platform. Visit https://minikube.sigs.k8s.io/docs/start/ to generate the latest install and start commands for your OS, architecture, and driver.
+
 ### macOS
 1. Install Homebrew if needed:
 ```bash
@@ -38,6 +40,7 @@ iwr https://community.chocolatey.org/install.ps1 -UseBasicParsing | iex
 ```powershell
 choco install docker-desktop -y
 ```
+   - Or download Docker Desktop directly from https://www.docker.com/products/docker-desktop
    - Open Docker Desktop and wait until Docker is running.
 3. Install Minikube:
 ```powershell
@@ -67,17 +70,27 @@ docker ps
 ```
 2. Download Minikube:
 ```bash
+# For x86_64 Linux:
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+# For ARM64 Linux:
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-arm64
 ```
 3. Install it:
 ```bash
+# For x86_64 Linux:
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
+# For ARM64 Linux:
+sudo install minikube-linux-arm64 /usr/local/bin/minikube
 ```
-4. Start Minikube:
+4. Clean up installer files:
+```bash
+rm -f minikube-linux-amd64 minikube-linux-arm64
+```
+5. Start Minikube:
 ```bash
 minikube start --driver=docker
 ```
-5. Verify:
+6. Verify:
 ```bash
 minikube status
 ```
@@ -86,7 +99,7 @@ minikube status
 
 ### WSL2
 1. Ensure WSL2 is installed and your distro is running.
-2. Install Docker Desktop for Windows and enable WSL2 integration.
+2. Install Docker Desktop for Windows, enable WSL2 integration, or download it directly from https://www.docker.com/products/docker-desktop.
 3. In WSL2, install Minikube:
 ```bash
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
