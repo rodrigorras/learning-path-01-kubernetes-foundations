@@ -18,12 +18,18 @@ brew install --cask docker
 3. Install Kind:
 ```bash
 brew install kind
+```   
+
+4. Install Kubectl:
+```bash
+brew install kubectl
 ```
-4. Create a cluster:
+
+5. Create a cluster:
 ```bash
 kind create cluster
 ```
-5. Verify:
+6. Verify:
 ```bash
 kubectl cluster-info --context kind-kind
 ```
@@ -46,11 +52,15 @@ choco install docker-desktop -y
 ```powershell
 choco install kind -y
 ```
-4. Create a cluster:
+4. Install Kubectl:
+```powershell
+choco install kubernetes-cli -y
+```
+5. Create a cluster:
 ```powershell
 kind create cluster
 ```
-5. Verify:
+6. Verify:
 ```powershell
 kubectl cluster-info --context kind-kind
 ```
@@ -80,11 +90,15 @@ curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-arm64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
-4. Create a cluster:
+4. Install Kubectl:
+```bash
+sudo snap install kubectl --classic
+```
+5. Create a cluster:
 ```bash
 kind create cluster
 ```
-5. Verify:
+6. Verify:
 ```bash
 kubectl cluster-info --context kind-kind
 ```
@@ -100,11 +114,15 @@ curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
-4. Create a cluster from WSL2:
+4. Install Kubectl:
+```bash
+sudo snap install kubectl --classic
+```
+5. Create a cluster from WSL2:
 ```bash
 kind create cluster
 ```
-5. Verify:
+6. Verify:
 ```bash
 kubectl cluster-info --context kind-kind
 ```
