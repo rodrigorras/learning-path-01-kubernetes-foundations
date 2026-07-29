@@ -10,5 +10,5 @@ This repository contains modules and chapters for practicing Kubernetes concepts
 
 *   [Chapter 1 - Installing Kind](module2-building-your-first-cluster/chapter-1-installing-kind/README.md)
 *   [Chapter 1 - Installing Minikube](module2-building-your-first-cluster/chapter-1-installing-minikube/README.md)
-*   [Chapter 2 - Installing Docker Desktop](module2-building-your-first-cluster/chapter-2-installing-docker-desktop/README.md)
+*   [Chapter 1 - Installing Docker Desktop](module2-building-your-first-cluster/chapter-1-installing-docker-desktop/README.md)
 

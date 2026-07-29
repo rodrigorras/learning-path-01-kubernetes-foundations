@@ -1,4 +1,4 @@
-# Chapter 2 - Installing Docker Desktop
+# Chapter 1 - Installing Docker Desktop
 
 This chapter guides you through the installation of Docker Desktop on your local machine, which provides a complete Docker development environment. You will find separate instructions for macOS and Windows operating systems.
 
