@@ -129,6 +129,27 @@ kubectl cluster-info --context kind-kind
 
 > WSL2 works best with Docker Desktop.
 
+### Creating a Multi-Node Cluster
+By default, `kind create cluster` will create a single-node cluster. To create a cluster with multiple nodes (e.g., one control-plane and two workers), you can use a YAML configuration file.
+
+1.  Create a file named `kind-cluster-config.yaml` with the following content:
+    ```yaml
+    # three node (two workers) cluster config
+    kind: Cluster
+    apiVersion: kind.x-k8s.io/v1alpha4
+    nodes:
+    - role: control-plane
+    - role: worker
+    - role: worker
+    ```
+
+2.  Create the cluster with the config file:
+    ```bash
+    kind create cluster --config kind-cluster-config.yaml
+    ```
+
+3.  You can see the nodes in your cluster with `kubectl get nodes`.
+
 ### Quick commands
 - `kind create cluster`
 - `kind get clusters`

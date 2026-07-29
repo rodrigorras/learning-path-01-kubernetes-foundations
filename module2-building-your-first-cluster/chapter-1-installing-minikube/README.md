@@ -116,6 +116,19 @@ minikube status
 
 > WSL2 works best with Docker Desktop and the Docker driver.
 
+### Creating a Multi-Node Cluster
+Minikube can create a cluster with multiple nodes by using the `--nodes` flag with the `minikube start` command.
+
+1.  To create a cluster with 3 nodes (1 control-plane and 2 workers), run the following command:
+    ```bash
+    minikube start --nodes 3 --driver=docker
+    ```
+    This will provision a multi-node cluster.
+
+2.  You can see the nodes in your cluster with `kubectl get nodes`.
+
+3.  To add a node to an existing cluster, you can use the `minikube node add` command.
+
 ### Quick commands
 - `minikube start`
 - `minikube status`
