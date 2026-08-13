@@ -76,7 +76,7 @@ data:
 
 Now we will deploy the official `node:20-alpine` image. The Deployment acts as our blueprint, instructing Kubernetes to mount our ConfigMap as a file directory and inject our Secret as an environment variable.
 
-Create a file named `02-deployment.yaml`:
+Create a file named `deployment.yaml`:
 
 ```yaml
 apiVersion: apps/v1
@@ -119,7 +119,7 @@ spec:
 
 To make our API reachable from outside the cluster, we will use a `LoadBalancer` Service. If you are using K3s for your local environment, its built-in ServiceLB will automatically bind this to your host node's IP—giving you a cloud-like experience immediately.
 
-Create a file named `03-service.yaml`:
+Create a file named `service.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -141,9 +141,10 @@ spec:
 Apply the configurations to your cluster. Order matters: the Secret and ConfigMap must exist before the Deployment attempts to use them.
 
 ```bash
-kubectl apply -f 01-config.yaml
-kubectl apply -f 02-deployment.yaml
-kubectl apply -f 03-service.yaml
+kubectl apply -f secret.yaml
+kubectl apply -f configmap.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
 ```
 
 Watch your Service spin up. You are waiting for the `EXTERNAL-IP` to change from `<pending>` to an actual IP address (or `localhost`/`127.0.0.1`).
