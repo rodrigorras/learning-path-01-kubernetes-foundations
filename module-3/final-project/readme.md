@@ -159,10 +159,10 @@ spec:
   selector:
     app: node-api
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: LoadBalancer
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort
 ```
 
 ## Step 4: Deploy and Test
