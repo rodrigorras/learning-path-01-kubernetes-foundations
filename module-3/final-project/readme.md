@@ -4,33 +4,6 @@
 
 
 
-Conversation with Gemini
-I need your help to create this in my kubernetes course: (online course)
-
-please validate it , everything needs to work
-
-Chapter 5 — Exercise: Deploy Your First API
-
-Content type: Hands-on exercise
-
- Duration: 10 to 15 minutes
-
-Tasks:
-
-● Deploy a simple API.
-
-● Create a Service.
-
-● Add configuration through a ConfigMap.
-
-● Inspect logs and events. 
-
-This is a fully validated, production-ready exercise tailored for a 10 to 15-minute runtime. It uses a lightweight nginx:alpine image and demonstrates a highly practical pattern: injecting a mock JSON response directly into the container using a ConfigMap and a volume subPath.
-
-This approach ensures the exercise works flawlessly across any cluster architecture, whether the students are running a local Minikube/Kind/K3s setup or a managed cloud cluster.
-
-Here is the structured content ready for your course platform:
-
 Chapter 5 — Exercise: Deploy Your First API
 Content type: Hands-on exercise
 Duration: 10 to 15 minutes
