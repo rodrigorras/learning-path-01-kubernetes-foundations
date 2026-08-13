@@ -23,7 +23,7 @@ In this exercise, you will connect the core concepts of Pods, Deployments, Servi
 
 Real APIs require both standard settings and sensitive credentials. We will create a Secret for our mock API key, and a ConfigMap to hold our actual Node.js application code and standard settings.
 
-Create a file named `01-config.yaml`:
+Create a file named `secret.yaml`:
 
 ```yaml
 apiVersion: v1
@@ -33,7 +33,11 @@ metadata:
 type: Opaque
 stringData:
   API_KEY: "super-secret-course-key-123"
----
+  ```
+
+Create a file named `configmap.yaml`:
+
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
