@@ -1,0 +1,16 @@
+# ==========================================
+# 1. DECLARATIVE CONFIGMAP
+# ==========================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_COLOR: "blue"
+  nginx.conf: |
+    server {
+        listen 80;
+        location / {
+            return 200 "ConfigMap Loaded!";
+        }
+    }
