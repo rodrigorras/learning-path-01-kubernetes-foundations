@@ -47,20 +47,49 @@ data:
     const http = require('http');
     const fs = require('fs');
     const port = 8080;
-    
+
     const config = JSON.parse(fs.readFileSync('/app/settings.json', 'utf8'));
-    const apiKey = process.env.API_KEY || "Missing Key!";
-    
+
+    // The secret injected by Kubernetes as an environment variable
+    const validApiKey = process.env.API_KEY || "Missing Key!";
+
     const server = http.createServer((req, res) => {
-      console.log(`[API LOG] Received ${req.method} request for ${req.url}`);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({
-        course: config.courseName,
-        message: config.welcomeMessage,
-        authenticated_with: apiKey
-      }));
+      console.log(`[API LOG] ${req.method} request for ${req.url}`);
+      
+      // Route 1: Health Check Endpoint (Open to the public)
+      if (req.url === '/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ status: "UP", healthy: true }) + '\n');
+      }
+      
+      // Authentication Gateway (Protects endpoints below this line)
+      const clientApiKey = req.headers['x-api-key'];
+      
+      if (clientApiKey !== validApiKey) {
+        console.log(`[AUTH FAILED] Provided key: ${clientApiKey}`);
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ 
+          error: "Unauthorized", 
+          message: "Access Denied: Missing or invalid x-api-key header." 
+        }) + '\n');
+      }
+      
+      // Route 2: Main API Endpoint (Protected)
+      if (req.url === '/' || req.url === '/api') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          course: config.courseName,
+          message: config.welcomeMessage,
+          status: "Successfully Authenticated!"
+        }) + '\n');
+      } 
+      // Route 3: 404 Error Handler
+      else {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: "Not Found", status: 404 }) + '\n');
+      }
     });
-    
+
     server.listen(port, () => {
       console.log(`Node.js API starting on port ${port}...`);
     });
