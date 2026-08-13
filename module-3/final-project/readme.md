@@ -117,7 +117,7 @@ spec:
 
 ## Step 3: Expose the Application (LoadBalancer)
 
-To make our API reachable from outside the cluster, we will use a `LoadBalancer` Service. If you are using K3s for your local environment, its built-in ServiceLB will automatically bind this to your host node's IP—giving you a cloud-like experience immediately.
+To make our API reachable from outside the cluster, we will use a `LoadBalancer` Service. If you are using K8s for your local environment, its built-in ServiceLB will automatically bind this to your host node's IP—giving you a cloud-like experience immediately.
 
 Create a file named `service.yaml`:
 
