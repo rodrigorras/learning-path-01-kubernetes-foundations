@@ -113,7 +113,7 @@ kind: Deployment
 metadata:
   name: my-node-api
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: node-api
