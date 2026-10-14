@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reconciliation-demo-deployment
+  labels:
+    app: reconciliation-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reconciliation-demo
+  template:
+    metadata:
+      labels:
+        app: reconciliation-demo
+    spec:
+      containers:
+      - name: web
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+

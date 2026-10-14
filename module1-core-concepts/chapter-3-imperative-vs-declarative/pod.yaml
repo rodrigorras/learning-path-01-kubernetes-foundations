@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: declarative-nginx-pod
+  labels:
+    app: demo-web
+    tier: frontend
+    environment: dev
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
+
