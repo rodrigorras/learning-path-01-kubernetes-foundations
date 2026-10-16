@@ -207,3 +207,4 @@ kubectl delete -f deployment-web.yaml
 | **ClusterIP** | Internal cluster only | `port: 80`, `targetPort: 80` | `service-clusterip.yaml` |
 | **NodePort** | External via Node IP | `nodePort: 30080` | `service-nodeport.yaml` |
 | **LoadBalancer** | External via Cloud LB | Auto-provisions Cloud IP | `service-loadbalancer.yaml` |
+

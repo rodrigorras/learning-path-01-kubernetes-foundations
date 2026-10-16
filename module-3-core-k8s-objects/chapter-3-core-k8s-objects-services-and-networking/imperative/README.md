@@ -141,3 +141,4 @@ kubectl delete deployment web-app
 | **View Service Endpoints** | `kubectl get endpoints <service-name>` |
 | **Port Forward to Localhost** | `kubectl port-forward svc/<service-name> 8080:80` |
 | **Open Service in Browser (Minikube)**| `minikube service <service-name>` |
+
