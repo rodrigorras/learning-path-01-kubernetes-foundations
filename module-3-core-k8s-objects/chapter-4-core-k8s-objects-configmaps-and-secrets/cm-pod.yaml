@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-pod
+spec:
+  containers:
+  - name: myapp
+    image: nginx
+    env:
+    - name: CONTAINER_COLOR
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: APP_COLOR
+    volumeMounts:
+    - name: config-volume
+      mountPath: /etc/nginx/conf.d
+  volumes:
+  - name: config-volume
+    configMap:
+      name: app-config

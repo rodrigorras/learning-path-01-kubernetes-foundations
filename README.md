@@ -33,6 +33,6 @@ This repository contains modules and chapters for practicing Kubernetes concepts
 *   [Chapter 3 - Core Kubernetes Objects: Services & Networking](module-3-core-k8s-objects/chapter-3-core-k8s-objects-services-and-networking/README.md)
     *   [Declarative Management](module-3-core-k8s-objects/chapter-3-core-k8s-objects-services-and-networking/declarative/README.md)
     *   [Imperative Management](module-3-core-k8s-objects/chapter-3-core-k8s-objects-services-and-networking/imperative/README.md)
-*   [Chapter 4 - ConfigMaps and Secrets](module-3-core-k8s-objects/chapter4-configmaps-and-secrets/commands.sh)
+*   [Chapter 4 - Core Kubernetes Objects: ConfigMaps & Secrets](module-3-core-k8s-objects/chapter-4-core-k8s-objects-configmaps-and-secrets/README.md)
 *   [Chapter 5 - Exercise: Deploy Your First API](module-3-core-k8s-objects/final-project/readme.md)
 
