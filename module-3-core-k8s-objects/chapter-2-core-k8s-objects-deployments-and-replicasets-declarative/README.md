@@ -1,4 +1,4 @@
-# Chapter 2 — Core Kubernetes Objects: Deployments & ReplicaSets
+# Chapter 2 — Core Kubernetes Objects: Deployments & ReplicaSets (Declarative)
 
 A hands-on guide exploring Kubernetes Deployments, ReplicaSet lifecycles, rolling updates, scaling, and declarative rollbacks.
 
