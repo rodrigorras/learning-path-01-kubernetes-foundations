@@ -19,6 +19,7 @@ This repository contains modules and chapters for practicing Kubernetes concepts
     *   [Using Kubeconfig & Selecting a Context](module2-building-your-first-cluster/chapter-2-kubeconfig-and-basic-commands/kubeconfig-and-contexts/README.md)
     *   [Basic Kubectl Commands](module2-building-your-first-cluster/chapter-2-kubeconfig-and-basic-commands/basic-commands/README.md)
 *   [Chapter 2 - Exploring Cluster Pods](module2-building-your-first-cluster/chapter-2-exploring-the-cluster-pods/README.md)
+*   [Chapter 2 - Navigating Namespaces & Managing Resource Quotas](module2-building-your-first-cluster/chapter-2-namespaces-and-resource-quotas/README.md)
 
 ### Module 3 - Workloads & Applications
 
