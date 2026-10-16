@@ -9,3 +9,4 @@ Explore how to manage scalable, self-healing containerized workloads using Kuber
 
 *   [Imperative Management](imperative/README.md)  
     *Execute lifecycle operations directly using `kubectl` CLI commands to create deployments, scale replicas, test self-healing, update container images, and roll back revisions.*
+
