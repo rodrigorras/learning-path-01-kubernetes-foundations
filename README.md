@@ -27,9 +27,9 @@ This repository contains modules and chapters for practicing Kubernetes concepts
 ### Module 3 - Core k8s Objects
 
 *   [Chapter 1 - Core Kubernetes Objects: Pods & Containers](module-3-core-k8s-objects/chapter-1-core-k8s-objects-pods-and-containers/README.md)
-*   **Chapter 2 — Deployments & ReplicaSets**
-    *   [Declarative Management](module-3-core-k8s-objects/chapter-2-core-k8s-objects-deployments-and-replicasets-declarative/README.md)
-    *   [Imperative Management](module-3-core-k8s-objects/chapter-2-core-k8s-objects-deployments-and-replicasets-imperative/README.md)
+*   [Chapter 2 - Core Kubernetes Objects: Deployments & ReplicaSets](module-3-core-k8s-objects/chapter-2-core-k8s-objects-deployments-and-replicasets/README.md)
+    *   [Declarative Management](module-3-core-k8s-objects/chapter-2-core-k8s-objects-deployments-and-replicasets/declarative/README.md)
+    *   [Imperative Management](module-3-core-k8s-objects/chapter-2-core-k8s-objects-deployments-and-replicasets/imperative/README.md)
 *   [Chapter 4 - ConfigMaps and Secrets](module-3-core-k8s-objects/chapter4-configmaps-and-secrets/commands.sh)
 *   [Chapter 5 - Exercise: Deploy Your First API](module-3-core-k8s-objects/final-project/readme.md)
 
