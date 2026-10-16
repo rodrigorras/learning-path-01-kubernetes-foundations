@@ -23,9 +23,9 @@ This repository contains modules and chapters for practicing Kubernetes concepts
     *   [Navigating Namespaces & Managing Resource Quotas](module2-building-your-first-cluster/chapter-2-exploring-the-cluster/namespaces-and-resource-quotas/README.md)
     *   [Pods](module2-building-your-first-cluster/chapter-2-exploring-the-cluster/pods/README.md)
 
-### Module 3 - Workloads & Applications
+### Module 3 - Core k8s Objects
 
-*   [Chapter 1 - Core Kubernetes Objects: Pods & Containers](module-3/chapter-1-core-k8s-objects-pods-and-containers/README.md)
-*   [Chapter 4 - ConfigMaps and Secrets](module-3/chapter4-configmaps-and-secrets/commands.sh)
-*   [Chapter 5 - Exercise: Deploy Your First API](module-3/final-project/readme.md)
+*   [Chapter 1 - Core Kubernetes Objects: Pods & Containers](module-3-core-k8s-objects/chapter-1-core-k8s-objects-pods-and-containers/README.md)
+*   [Chapter 4 - ConfigMaps and Secrets](module-3-core-k8s-objects/chapter4-configmaps-and-secrets/commands.sh)
+*   [Chapter 5 - Exercise: Deploy Your First API](module-3-core-k8s-objects/final-project/readme.md)
 
