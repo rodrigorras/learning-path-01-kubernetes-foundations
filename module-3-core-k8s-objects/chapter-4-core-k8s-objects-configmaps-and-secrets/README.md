@@ -182,3 +182,4 @@ kubectl delete secret app-secret
 | **ConfigMap (File)** | Imperative | Declarative (volume) | `kubectl create configmap <name> --from-file=<filename>` |
 | **Secret (stringData)** | Declarative | Declarative (env) | `secretKeyRef` in Pod `env` |
 | **Secret (Volume Mount)**| Declarative | Declarative (volume) | Mounted as `tmpfs` under `/etc/secrets` |
+
