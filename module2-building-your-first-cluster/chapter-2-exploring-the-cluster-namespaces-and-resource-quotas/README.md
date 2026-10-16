@@ -1,4 +1,4 @@
-# Navigating Namespaces and Managing Resource Quotas in Kubernetes
+# Chapter 2 — Exploring the Cluster: Namespaces & Resource Quotas
 
 This tutorial covers how to inspect cluster contexts and namespaces, create a deployment, set up a resource quota to limit pod creation, and troubleshoot quota limits using Kubernetes CLI tools (`kubectx`, `kubens`, and `kubectl`).
 

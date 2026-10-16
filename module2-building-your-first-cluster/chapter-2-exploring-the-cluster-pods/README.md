@@ -1,4 +1,4 @@
-# Chapter 2 — Exploring Cluster Pods
+# Chapter 2 — Exploring the Cluster: Pods
 
 A tutorial based on the commands executed in the video walkthrough.
 
