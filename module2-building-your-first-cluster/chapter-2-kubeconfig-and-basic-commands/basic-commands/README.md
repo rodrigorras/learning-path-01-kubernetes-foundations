@@ -1,177 +1,221 @@
-# Chapter 2 — Basic Kubectl Commands
+# Basic Kubectl Commands Reference Guide
 
-**Content type:** Hands-on command reference & practice  
-**Duration:** 15 minutes  
+A structured, step-by-step guide to working with Kubernetes clusters, managing workloads, inspecting state, troubleshooting, and cleaning up resources based on the hands-on video tutorial.
 
 ---
 
-## Overview
+## Step 1: Cluster & Context Verification
 
-`kubectl` is the command-line interface for communicating with the Kubernetes API server. Almost every command follows a consistent, predictable structure:
+Use these commands to verify which cluster you are connected to and ensure the node control plane is ready.
 
-```text
-kubectl <command> <type> <name> [flags]
+### View Available Contexts
+Displays available context configurations to show which Kubernetes cluster you are currently targeting:
+```bash
+kubectl config get-contexts
 ```
 
-* **Command (Verb):** What you want to do (`get`, `describe`, `logs`, `apply`, `delete`, `exec`).
-* **Type:** The Kubernetes resource type (`nodes`, `pods`, `services`, `deployments`).
-* **Name:** The specific resource name (optional when listing all).
-* **Flags:** Additional options (e.g. `-n kube-system`, `-o wide`, `-f file.yaml`).
+### Switch Contexts Easily (`kubectx`)
+An alternative utility used to easily switch between cluster contexts:
+```bash
+kubectx
+```
+
+### Cluster Control Plane Info
+Provides information about the control plane, including the Kubernetes API server address and core services like CoreDNS:
+```bash
+kubectl cluster-info
+```
+
+### List Cluster Nodes
+Lists all cluster nodes along with their status, IP, kernel, and container runtime version:
+```bash
+kubectl get nodes
+```
 
 ---
 
-## 1. Cluster Information & Node Discovery
+## Step 2: Creating and Managing Resources
 
-Check the health and nodes of your connected cluster:
+Learn how to manage namespaces and deploy pods using both imperative (direct commands) and declarative (YAML configuration files) approaches.
 
+### Imperative Management
+
+#### Create a Namespace
+Creates a new isolated namespace:
 ```bash
-# Display the cluster control plane and CoreDNS endpoints
-kubectl cluster-info
+kubectl create namespace <namespace-name>
+```
+**Video Execution:** `kubectl create namespace nginx`
 
-# List all nodes (worker/control-plane machines) in the cluster
-kubectl get nodes
+#### Run a Pod Directly
+Directly creates and runs a pod imperatively without needing a manifest file:
+```bash
+kubectl run <pod-name> --image=<image-name> -n <namespace>
+```
+**Video Execution:** Attempted `kubectl run nginx --image=nginx -n nginx` *(failed initially because the namespace had not been created yet)*.
 
-# Show additional details about nodes (IPs, OS image, kernel version)
-kubectl get nodes -o wide
+### Declarative Management
 
-# Display supported Kubernetes API resources and short aliases (e.g., po, svc, deploy)
+#### Apply a Manifest File
+Applies a declarative YAML configuration file to create or update cluster objects (e.g., pods, deployments, services):
+```bash
+kubectl apply -f <filename.yaml>
+```
+**Video Execution:** Applied as `kubectl apply -f pod.yaml` (deploying the `nginx-declarative` pod into namespace `nginx`).
+
+---
+
+## Step 3: Observation and Status Inspection
+
+Use observation commands to check object health and inspect detailed operational configurations.
+
+### List API Resources
+Lists all available API resources/objects configured within the cluster:
+```bash
 kubectl api-resources
 ```
 
----
-
-## 2. Inspecting Resources (`kubectl get`)
-
-`kubectl get` lists resources in tabular format:
-
+### List Namespaced Resources
+Filters and lists only the objects that exist within specific namespaces (e.g., pods, deployments, roles):
 ```bash
-# List all pods in the default namespace
-kubectl get pods
+kubectl api-resources --namespaced=true
+```
 
-# List pods across ALL namespaces in the cluster
+### List Pods Across All Namespaces
+Lists all pods across all namespaces within the cluster:
+```bash
 kubectl get pods -A
-# (or: kubectl get pods --all-namespaces)
+```
 
-# List pods with extended info (Node assigned, Pod IP address)
-kubectl get pods -o wide
+### List Pods with Extended Details
+Retrieves detailed pod information including assigned IP addresses and node allocations:
+```bash
+kubectl get pods -n <namespace> -o wide
+```
+**Video Execution:** Ran with flag ordering:
+```bash
+kubectl get pods -o wide -n nginx
+```
 
-# List pods showing their assigned labels
-kubectl get pods --show-labels
+### Export Pod YAML Specification
+Outputs the full live declarative YAML status of a specific pod:
+```bash
+kubectl get pod <pod-name> -n <namespace> -o yaml
+```
+**Video Execution:** Executed specifically for the declarative pod as:
+```bash
+kubectl get pod nginx-declarative -n nginx -o yaml
+```
 
-# Filter pods by a label
-kubectl get pods -l app=web
-
-# List other resource types
-kubectl get services
-kubectl get deployments
-kubectl get namespaces
+### Export Node YAML Specification
+Displays full YAML output for nodes, including resource metrics like CPU, memory, and pod capacity:
+```bash
+kubectl get nodes -o yaml
 ```
 
 ---
 
-## 3. Deep-Dive Inspection (`kubectl describe`)
+## Step 4: Troubleshooting and Debugging
 
-When a resource is failing, pending, or misconfigured, `kubectl describe` is your best diagnostic tool. It outputs configuration details and chronological cluster **Events**:
+When pods fail (e.g., due to an image pull error or code crash), use these commands to locate and resolve issues.
 
+### Describe Pod Details & Lifecycle Events
+Shows detailed metadata and lifecycle events for a pod to reveal why it failed (e.g., `ImagePullBackOff`):
 ```bash
-# Inspect a specific node
-kubectl describe node <NODE_NAME>
-
-# Inspect a specific pod
-kubectl describe pod <POD_NAME>
+kubectl describe pod <pod-name> -n <namespace>
+```
+**Video Execution:** Executed with flags ordered as:
+```bash
+kubectl describe pod -n nginx nginx-declarative
 ```
 
-> **Pro-Tip:** Always scroll to the bottom of `kubectl describe` output—the **Events** section will show scheduling failures, image pull errors (`ImagePullBackOff`), or container crashes (`CrashLoopBackOff`).
-
----
-
-## 4. Troubleshooting: Logs & Shell Access
-
-### Reading Container Logs (`kubectl logs`)
-Inspect what your application is writing to `stdout`/`stderr`:
-
+### Stream Pod Logs
+Streams live application logs running inside the specified container:
 ```bash
-# Print existing logs for a pod
-kubectl logs <POD_NAME>
-
-# Stream/follow logs in real-time (like tail -f)
-kubectl logs -f <POD_NAME>
-
-# View logs from a previous, crashed container instance
-kubectl logs -p <POD_NAME>
-
-# If a pod has multiple containers, specify the container name with -c
-kubectl logs <POD_NAME> -c <CONTAINER_NAME>
+kubectl logs -f <pod-name> -n <namespace>
+```
+**Video Execution:** Executed as:
+```bash
+kubectl logs -f -n nginx nginx-declarative
 ```
 
-### Executing Commands in a Container (`kubectl exec`)
-Run a command or open an interactive shell inside a running container:
-
+### Interactive Terminal Inside Pod
+Opens an interactive bash terminal inside a running pod container for direct troubleshooting:
 ```bash
-# Open an interactive shell inside a container
-kubectl exec -it <POD_NAME> -- /bin/sh
-# (or /bin/bash if available)
-
-# Run a quick command inside the container without entering a full shell
-kubectl exec <POD_NAME> -- env
-kubectl exec <POD_NAME> -- ls -la /app
+kubectl exec -it <pod-name> -n <namespace> -- bash
+```
+**Video Execution:** Executed as:
+```bash
+kubectl exec -it -n nginx nginx-declarative -- bash
 ```
 
 ---
 
-## 5. Declarative Management (`apply` & `delete`)
+## Step 5: Testing and Performance Monitoring
 
-Manage resources via manifest files:
+Test container functionality locally and track real-time resource utilization across nodes and pods.
 
+### Port-Forwarding to Local Machine
+Establishes a network tunnel between your local machine and a running pod to test services locally:
 ```bash
-# Create or update resources declaratively from a file
-kubectl apply -f manifest.yaml
+kubectl port-forward <pod-name> <local-port>:<container-port> -n <namespace>
+```
 
-# Apply all manifests in a directory
-kubectl apply -f ./manifests/
+### Node Resource Metrics
+Displays active CPU and memory consumption for every node in the cluster:
+```bash
+kubectl top nodes
+```
 
-# Delete resources defined in a file
-kubectl delete -f manifest.yaml
-
-# Delete an individual resource by name
-kubectl delete pod <POD_NAME>
-kubectl delete deployment <DEPLOYMENT_NAME>
+### Pod Resource Metrics
+Displays real-time CPU and memory usage metrics for individual pods:
+```bash
+kubectl top pods
 ```
 
 ---
 
-## 6. Output Formatting (`-o`)
+## Step 6: Resource Cleanup
 
-Control the format of `kubectl` command outputs:
+Tear down resources once testing is completed.
 
+### Delete an Individual Pod
+Deletes an individual pod:
 ```bash
-# Standard table with extra columns (IPs, nodes)
-kubectl get pods -o wide
-
-# Output full live object in YAML format (great for learning and exporting)
-kubectl get pod <POD_NAME> -o yaml
-
-# Output full live object in JSON format
-kubectl get pod <POD_NAME> -o json
-
-# Extract a specific field using jsonpath
-kubectl get pod <POD_NAME> -o jsonpath='{.status.podIP}'
+kubectl delete pod <pod-name> -n <namespace>
 ```
+
+### Delete a Namespace
+Deletes the namespace along with all objects created inside it:
+```bash
+kubectl delete namespace <namespace-name>
+```
+**Video Execution:** Executed as `kubectl delete namespace nginx`.
 
 ---
 
-## 7. Quick Reference Cheatsheet
+## Quick Reference Summary
 
-| Task | Command |
-| :--- | :--- |
-| **Cluster info** | `kubectl cluster-info` |
-| **List nodes** | `kubectl get nodes -o wide` |
-| **List pods (current namespace)** | `kubectl get pods` |
-| **List pods (all namespaces)** | `kubectl get pods -A` |
-| **Inspect resource & events** | `kubectl describe pod <name>` |
-| **Stream pod logs** | `kubectl logs -f <name>` |
-| **Open container terminal** | `kubectl exec -it <name> -- sh` |
-| **Apply manifest** | `kubectl apply -f <file.yaml>` |
-| **Delete manifest** | `kubectl delete -f <file.yaml>` |
-| **View recent cluster events** | `kubectl get events --sort-by='.metadata.creationTimestamp'` |
-
+| Step | Action | Canonical Command | Video Example |
+| :--- | :--- | :--- | :--- |
+| **1. Cluster Verification** | Get contexts | `kubectl config get-contexts` | `kubectl config get-contexts` |
+| | Switch context | `kubectx` | `kubectx` |
+| | Control plane info | `kubectl cluster-info` | `kubectl cluster-info` |
+| | List nodes | `kubectl get nodes` | `kubectl get nodes` |
+| **2. Resource Management** | Create namespace | `kubectl create namespace <name>` | `kubectl create namespace nginx` |
+| | Imperative pod | `kubectl run <name> --image=<img> -n <ns>` | `kubectl run nginx --image=nginx -n nginx` |
+| | Declarative apply | `kubectl apply -f <file.yaml>` | `kubectl apply -f pod.yaml` |
+| **3. Observation** | All API resources | `kubectl api-resources` | `kubectl api-resources` |
+| | Namespaced resources | `kubectl api-resources --namespaced=true` | `kubectl api-resources --namespaced=true` |
+| | Pods in all namespaces | `kubectl get pods -A` | `kubectl get pods -A` |
+| | Extended pod info | `kubectl get pods -n <ns> -o wide` | `kubectl get pods -o wide -n nginx` |
+| | Pod live YAML | `kubectl get pod <name> -n <ns> -o yaml` | `kubectl get pod nginx-declarative -n nginx -o yaml` |
+| | Node live YAML | `kubectl get nodes -o yaml` | `kubectl get nodes -o yaml` |
+| **4. Troubleshooting** | Describe pod & events | `kubectl describe pod <name> -n <ns>` | `kubectl describe pod -n nginx nginx-declarative` |
+| | Follow pod logs | `kubectl logs -f <name> -n <ns>` | `kubectl logs -f -n nginx nginx-declarative` |
+| | Interactive shell | `kubectl exec -it <name> -n <ns> -- bash` | `kubectl exec -it -n nginx nginx-declarative -- bash` |
+| **5. Testing & Monitoring**| Port forward | `kubectl port-forward <name> <lport>:<cport> -n <ns>` | `kubectl port-forward ...` |
+| | Node metrics | `kubectl top nodes` | `kubectl top nodes` |
+| | Pod metrics | `kubectl top pods` | `kubectl top pods` |
+| **6. Cleanup** | Delete pod | `kubectl delete pod <name> -n <ns>` | Verbally mentioned (`delete pod nginx`) |
+| | Delete namespace | `kubectl delete namespace <name>` | `kubectl delete namespace nginx` |
