@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: labeled-pod
+  namespace: default
+  labels:
+    app.kubernetes.io/name: web-app
+    app.kubernetes.io/instance: web-app-prod
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/component: frontend
+spec:
+  containers:
+    - name: web-container
+      image: nginx:latest
+

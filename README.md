@@ -25,6 +25,7 @@ This repository contains modules and chapters for practicing Kubernetes concepts
 
 ### Module 3 - Workloads & Applications
 
+*   [Chapter 1 - Core Kubernetes Objects: Pods & Containers](module-3/chapter-1-core-k8s-objects-pods-and-containers/README.md)
 *   [Chapter 4 - ConfigMaps and Secrets](module-3/chapter4-configmaps-and-secrets/commands.sh)
 *   [Chapter 5 - Exercise: Deploy Your First API](module-3/final-project/readme.md)
 
