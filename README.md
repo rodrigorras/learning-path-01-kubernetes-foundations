@@ -12,10 +12,10 @@ This repository contains modules and chapters for practicing Kubernetes concepts
 
 ### Module 2 - Building Your First Cluster
 
-*   **Chapter 1 — Local Kubernetes Options**
-    *   [Installing Kind](module2-building-your-first-cluster/chapter-1-installing-kind/README.md)
-    *   [Installing Minikube](module2-building-your-first-cluster/chapter-1-installing-minikube/README.md)
-    *   [Installing Docker Desktop](module2-building-your-first-cluster/chapter-1-installing-docker-desktop/README.md)
+*   [Chapter 1 — Local Kubernetes Options](module2-building-your-first-cluster/chapter-1-local-kubernetes-options/README.md)
+    *   [Installing Kind](module2-building-your-first-cluster/chapter-1-local-kubernetes-options/installing-kind/README.md)
+    *   [Installing Minikube](module2-building-your-first-cluster/chapter-1-local-kubernetes-options/installing-minikube/README.md)
+    *   [Installing Docker Desktop](module2-building-your-first-cluster/chapter-1-local-kubernetes-options/installing-docker-desktop/README.md)
 *   [Chapter 2 - Working with Clusters: Kubeconfig, Contexts & Basic Commands](module2-building-your-first-cluster/chapter-2-kubeconfig-and-basic-commands/README.md)
     *   [Using Kubeconfig & Selecting a Context](module2-building-your-first-cluster/chapter-2-kubeconfig-and-basic-commands/kubeconfig-and-contexts/README.md)
     *   [Basic Kubectl Commands](module2-building-your-first-cluster/chapter-2-kubeconfig-and-basic-commands/basic-commands/README.md)
